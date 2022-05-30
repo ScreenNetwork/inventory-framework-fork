@@ -1,0 +1,18 @@
+import org.apache.tools.ant.filters.ReplaceTokens
+
+plugins {
+    id "com.github.johnrengelman.shadow" version "7.1.2"
+}
+
+processResources {
+    from(sourceSets.main.resources.srcDirs) {
+        duplicatesStrategy DuplicatesStrategy.INCLUDE
+        filter ReplaceTokens, tokens: [version: version]
+    }
+}
+
+dependencies {
+    implementation 'org.jetbrains:annotations:22.0.0'
+
+    implementation project(':framework')
+}

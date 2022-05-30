@@ -1,0 +1,38 @@
+subprojects {
+    apply plugin: 'java-library'
+
+    group 'me.saiintbrisson.minecraft'
+    version '2.5'
+
+    repositories {
+        mavenCentral()
+        mavenLocal()
+        maven { url = 'https://hub.spigotmc.org/nexus/content/repositories/snapshots/' }
+        maven { url = 'https://oss.sonatype.org/content/repositories/snapshots' }
+    }
+
+    dependencies {
+        compileOnly libs.spigot.api
+        compileOnlyApi libs.jetbrains.annotations
+        testCompileOnly libs.jetbrains.annotations
+        testImplementation libs.junit.api
+        testRuntimeOnly libs.junit.engine
+        testImplementation libs.spigot.api
+    }
+
+    test {
+        useJUnitPlatform()
+    }
+
+    tasks.withType(JavaCompile) {
+        options.encoding = 'UTF-8'
+    }
+
+    java {
+        withSourcesJar()
+        withJavadocJar()
+
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+}
